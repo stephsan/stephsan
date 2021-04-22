@@ -22,3 +22,7 @@ Route::get('ajouter-produit', [FormationController::class, 'ajouterProduit']);
 Route::get('ajouter-produit-2', [FormationController::class, 'ajouterProduit2']);
 
 Route::get('update-produit', [FormationController::class, 'updateProduit']);
+
+Route::get('update-produit-2/{produit}', [FormationController::class, 'updateProduit2']);
+
+Route::get('suppression-produit', [FormationController::class, 'suppressionProduit']);

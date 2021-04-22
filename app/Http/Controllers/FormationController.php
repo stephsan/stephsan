@@ -52,4 +52,24 @@ class FormationController extends Controller
 
         dd($produit1);
     }
+
+    public function updateProduit2(Produit $produit)
+    {
+        // dd($produit->designation);
+
+        $result = Produit::where('id', $produit->id)->update([
+            'designation' => 'Téléphone',
+            'prix' => 50000,
+            'description' => 'Ceci est la description de téléphone',
+            'quantite' => 26,
+        ]);
+
+        dd($produit->designation, $result);
+    }
+
+    public function suppressionProduit()
+    {
+        $result = Produit::destroy(1);
+        dd($result);
+    }
 }
