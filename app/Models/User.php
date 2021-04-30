@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -40,4 +41,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function produits(){
+        return $this->belongsToMany(Produit::class);
+    }
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+    public function isAdmin(){
+        if($this->role->profil=="super-admin" OR $this->role->profil=='admin'){
+          return true;
+        }else{
+            return false;
+     }
+        //return ($this->role->profil=="super-admin" OR $this->role->profil=='admin');
+    }
+    public function routeNotificationForNexmo($notification)
+    {
+        return $this->phone_number;
+    }
 }

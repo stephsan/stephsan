@@ -2,18 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use App\Models\Produit;
+use App\Models\User;
 
 class FormationController extends Controller
 {
     public function index()
     {
-        $produits = Produit::all();
+       // $produits = Produit::all();
         $produit = Produit::first();
+        $categorie= Categorie::first();
+        $produit->categorie_id=$categorie->id;
+        $user1= User::first();
+        $user1->produits()->attach($produit);
 
-        $produit2 = Produit::where('prix', '<', 500000)->where('quantite', '!=', 50)->get();
+        dd($user1->produits);
+        $produit->save();
 
-        dd($produit2);
+        //$produit2 = Produit::where('prix', '<', 500000)->where('quantite', '!=', 50)->get();
+
+        //dd($produit->categorie);
     }
 
     public function ajouterProduit()
